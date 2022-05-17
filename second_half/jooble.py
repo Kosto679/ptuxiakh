@@ -9,10 +9,11 @@ from scrapy.crawler import CrawlerProcess
 class ifexist():
     def ifexist(data):
         try:
-            connection = mysql.connector.connect(host='snf-876565.vm.okeanos.grnet.gr',
-                                                 database='crawlerdb',
-                                                 user='root',
-                                                 password='10dm1@b0320')
+            connection = mysql.connector.connect(host="localhost",
+                                   port="13306",
+                                   user="root",
+                                   database="crawlerdb",
+                                   password="mypass123")
             cursor = connection.cursor(prepared=True)
             sql_insert_query = "SELECT job_url FROM `store_all` where `job_url` = '" + str(data) + "'"
             cursor = connection.cursor()
