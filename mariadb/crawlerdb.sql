@@ -31,7 +31,7 @@ USE `crawlerdb`;
 
 CREATE TABLE `store_all` (
   `id` int(11) NOT NULL,
-  `job_cat` text NOT NULL,
+  `job_cat` text  NULL,
   `job_url` text NOT NULL,
   `job_description` longtext DEFAULT NULL,
   `Date` datetime NOT NULL,
