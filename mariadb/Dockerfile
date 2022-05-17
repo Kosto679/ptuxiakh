@@ -1,0 +1,10 @@
+FROM mariadb:10.4
+
+WORKDIR /mariadb
+
+EXPOSE  13306:3306
+
+ENV MARIADB_ROOT_PASSWORD=mypass123
+
+
+
