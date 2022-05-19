@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  db:
+
+    build:
+      context: .
+      dockerfile: db.dockerfile
+    container_name: db
+    environment:
+      MARIADB_ROOT_PASSWORD: mypass123
+      MARIADB_DATABASE: crawlerdb
+      MARIADB_USER: example
+      MARIADB_PASSWORD: example
+    ports:
+      - "13306:3306"
+    volumes:
+      - dbdata:/var/lib/mariadb
+      - "./sql-scripts:/docker-entrypoint-initdb.d"
+  phpmyadmin:
+
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+volumes:
+  dbdata:
+  
+
