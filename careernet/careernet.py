@@ -8,8 +8,7 @@ class CarrernetSpider(scrapy.Spider):
     page_number = 1
     start_urls = ['https://www.careernet.gr/aggelies']
     # mysql connection
-    conn = mysql.connector.connect(host="localhost",
-                                   port="13306",
+    conn = mysql.connector.connect(host="db",                                  
                                    user="root",
                                    database="crawlerdb",
                                    password="mypass123")

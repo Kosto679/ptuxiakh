@@ -5,8 +5,8 @@ from scrapy.crawler import CrawlerProcess
 class ifexist():
     def ifexist(data):
         try:
-            connection = mysql.connector.connect(host='localhost',
-                                                 port='13306',
+            connection = mysql.connector.connect(host='db',
+                                                 #port='13306',
                                                  database='crawlerdb',
                                                  user='root',
                                                  password='mypass123')
@@ -39,7 +39,7 @@ class randstad(scrapy.Spider):
                                                  password='mypass123')
             self.cursor = self.connection.cursor()
         except mysql.connector.Error as error:
-            self.onnection.rollback()
+            self.connection.rollback()
             print("Failed to insert into MySQL table {}".format(error))
 
     def parse(self, response):

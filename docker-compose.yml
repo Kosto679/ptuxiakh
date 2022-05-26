@@ -1,10 +1,9 @@
 version: '3.8'
 services:
   db:
-
     build:
-      context: .
-      dockerfile: db.dockerfile
+      context: ./mariadb
+      dockerfile: Dockerfile
     container_name: db
     environment:
       MARIADB_ROOT_PASSWORD: mypass123
@@ -14,8 +13,9 @@ services:
     ports:
       - "13306:3306"
     volumes:
-      - dbdata:/var/lib/mariadb
-      - "./sql-scripts:/docker-entrypoint-initdb.d"
+      - dbdata:/var/lib/mysql
+    hostname: db
+
   phpmyadmin:
 
     image: phpmyadmin/phpmyadmin
@@ -28,7 +28,33 @@ services:
       PMA_ARBITRARY: 1
     restart: always
     ports:
-      - 8081:80
+      - 8081:80  
+    hostname: phpmyadmin
+  #carrerjet:
+   #build:
+     #context: ./careerjet
+      #dockerfile: Dockerfile
+  careernet:
+    build:
+      context: ./careernet
+      dockerfile: Dockerfile
+    hostname: careernet
+    container_name: careernet1
+    links:
+      - db
+    environment:
+      WAIT_HOSTS: db:13306
+    
+   
+  #indeedgr:
+  #jobfind:
+  #jooble:
+  #kariera:
+  #randstand:
+  #skywalker:
+    #build:
+      #context: ./skywalker
+      #dockerfile: skywalker.dockerfile
 volumes:
   dbdata:
   

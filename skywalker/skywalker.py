@@ -33,7 +33,7 @@ class ifexist():
             connection = mysql.connector.connect(host="localhost",
                                    port="13306",
                                    user="root",
-                                   database="crawler_db",
+                                   database="crawlerdb",
                                    password="mypass123")
             cursor = connection.cursor(prepared=True)
             
@@ -60,7 +60,7 @@ class spider_skywalker(scrapy.Spider):
             self.connection = mysql.connector.connect(host="localhost",
                                    port="13306",
                                    user="root",
-                                   database="crawler_db",
+                                   database="crawlerdb",
                                    password="mypass123")
             self.cursor = self.connection.cursor(prepared=True)
             sql_select_Query = "SELECT job_url FROM store_all"
