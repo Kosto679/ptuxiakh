@@ -58,7 +58,7 @@ services:
     container_name: randstad
     depends_on:
       - db
-    command: 
+    #command: 
     restart: on-failure
     
   #skywalker:
