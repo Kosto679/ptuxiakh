@@ -3,7 +3,7 @@ services:
   db:
 
     build:
-      context: .
+      context: /mariadb
       dockerfile: db.dockerfile
     container_name: db
     environment:
@@ -14,7 +14,7 @@ services:
     ports:
       - "13306:3306"
     volumes:
-      - dbdata:/var/lib/mariadb
+      - dbdata:/var/lib/mysql
       - "./sql-scripts:/docker-entrypoint-initdb.d"
   phpmyadmin:
 
@@ -29,6 +29,14 @@ services:
     restart: always
     ports:
       - 8081:80
+  os:
+    build:
+      context: /second_half
+      dockerfile: Dockerfile
+    
+    links:
+      - db
+  
 volumes:
   dbdata:
   
