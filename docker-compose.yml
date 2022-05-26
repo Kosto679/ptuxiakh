@@ -4,6 +4,7 @@ services:
     build:
       context: ./mariadb
       dockerfile: Dockerfile
+      
     container_name: db
     environment:
       MARIADB_ROOT_PASSWORD: mypass123
@@ -40,17 +41,26 @@ services:
       dockerfile: Dockerfile
     hostname: careernet
     container_name: careernet1
-    links:
+    depends_on:
       - db
-    environment:
-      WAIT_HOSTS: db:13306
+    restart: on-failure
     
    
   #indeedgr:
   #jobfind:
   #jooble:
   #kariera:
-  #randstand:
+  randstand:
+    build:
+      context: ./randstad
+      dockerfile: Dockerfile
+    hostname: randstad
+    container_name: randstad
+    depends_on:
+      - db
+    command: 
+    restart: on-failure
+    
   #skywalker:
     #build:
       #context: ./skywalker
