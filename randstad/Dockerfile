@@ -6,9 +6,10 @@ COPY requirements.txt ./
 
 RUN pip install  -r requirements.txt
 
-#ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait
-#RUN chmod +x /wait
+ADD wait-for.sh .
+
+RUN chmod +x wait-for.sh
 
 COPY . .
 
-CMD [ "python", "./randstad.py"]
+#CMD [ "python", "./randstad.py"]
