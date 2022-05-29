@@ -18,7 +18,6 @@ services:
     hostname: db
 
   phpmyadmin:
-
     image: phpmyadmin/phpmyadmin
     container_name: pma
     links:
@@ -31,41 +30,96 @@ services:
     ports:
       - 8081:80  
     hostname: phpmyadmin
+
   #carrerjet:
    #build:
      #context: ./careerjet
-      #dockerfile: Dockerfile
+     #dockerfile: Dockerfile
+    #hostname: careerjet
+    #container_name: careerjet
+    #depends_on:
+      #- db
+    #command:
+    #restart: on-failure
+ 
   careernet:
     build:
       context: ./careernet
       dockerfile: Dockerfile
     hostname: careernet
-    container_name: careernet1
+    container_name: careernet
     depends_on:
       - db
-    restart: on-failure
+    command: sh -c './wait-for db:3306 -- database is ready for connections' , '--' , 'python' , 'careernet.py'
+    restart: on-failure  
     
-   
-  #indeedgr:
-  #jobfind:
-  #jooble:
-  #kariera:
-  randstand:
-    build:
-      context: ./randstad
-      dockerfile: Dockerfile
-    hostname: randstad
-    container_name: randstad
-    depends_on:
-      - db
-    #command: 
-    restart: on-failure
-    
-  #skywalker:
-    #build:
-      #context: ./skywalker
-      #dockerfile: skywalker.dockerfile
 volumes:
   dbdata:
+  # indeedgr:
+  #  build: 
+  #    context: ./indeedgr
+  #    dockerfile: Dockerfile
+  #   hostname: indeedgr
+  #   container_name: indeedgr
+  #   depends_on:
+  #    - db
+  #   command:
+  #   restart: on-failure
+  
+  #jobfind:
+  #  build: 
+   #   context: ./jobfind
+   #   dockerfile: Dockerfile
+   # hostname: jobfind
+   # container_name: jobfind
+    #depends_on:
+    #  - db
+    #command:
+    #restart: on-failure
+  
+  #jooble:
+  #  build: 
+   #   context: ./jooble
+    #  dockerfile: Dockerfile
+    #hostname: jooble
+    #container_name: jooble
+    #depends_on:
+     # - db
+    #command:
+    #restart: on-failure
+  
+  # kariera:
+  #   build: 
+  #     context: ./kariera
+  #     dockerfile: Dockerfile
+  #   hostname: kariera
+  #   container_name: kariera
+  #   depends_on:
+  #     - db
+  #   #command:
+  #   restart: on-failure
+  
+  # randstand:
+  #   build:
+  #     context: ./randstad
+  #     dockerfile: Dockerfile
+  #   hostname: randstad
+  #   container_name: randstad
+  #   depends_on:
+  #     - db
+  #   #command: 
+  #   restart: on-failure
+  
+  # skywalker:
+  #   build:
+  #     context: ./skywalker
+  #     dockerfile: Dockerfile
+  #   hostname: skywalker
+  #   container_name: skywalker
+  #   depends_on: 
+  #     - db
+  #   #command: 
+  #   restart: on-failure
+
   
 
