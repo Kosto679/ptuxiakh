@@ -10,8 +10,7 @@ start = timer()
 class ifexist():
     def ifexist(data):
         try:
-            connection = mysql.connector.connect(host='localhost',
-                                                 port='13306',
+            connection = mysql.connector.connect(host='db',                                               
                                                  database='crawlerdb',
                                                  user='root',
                                                  password='mypass123')
@@ -89,8 +88,7 @@ class spider_careerjet(scrapy.Spider):
         self.count_new = count_new
         self.count_exist = count_exist
         try:
-            self.connection = mysql.connector.connect(host='localhost',
-                                                 port='13306',
+            self.connection = mysql.connector.connect(host='db',
                                                  database='crawlerdb',
                                                  user='root',
                                                  password='mypass123')

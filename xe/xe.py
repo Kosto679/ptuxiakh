@@ -8,8 +8,7 @@ from scrapy.crawler import CrawlerProcess
 class ifexist():
     def ifexist(data):
         try:
-            connection = mysql.connector.connect(host='localhost',
-                                                 port='13306',
+            connection = mysql.connector.connect(host='db',
                                                  database='crawlerdb',
                                                  user='root',
                                                  password='mypass123')
@@ -37,8 +36,7 @@ class xe(scrapy.Spider):
         self.count_new = 0
         self.exist = 0
         try:
-            self.connection = mysql.connector.connect(host='localhost',
-                                                      port='13306',
+            self.connection = mysql.connector.connect(host='db',
                                                       database='crawlerdb',
                                                       user='root',
                                                       password='mypass123')

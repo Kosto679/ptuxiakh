@@ -30,8 +30,7 @@ class ajax():
 class ifexist():
     def ifexist(data):
         try:
-            connection = mysql.connector.connect(host="localhost",
-                                   port="13306",
+            connection = mysql.connector.connect(host="db",
                                    user="root",
                                    database="crawlerdb",
                                    password="mypass123")
@@ -57,8 +56,7 @@ class spider_skywalker(scrapy.Spider):
         self.count_new = count_new
         self.count_exist = count_exist
         try:
-            self.connection = mysql.connector.connect(host="localhost",
-                                   port="13306",
+            self.connection = mysql.connector.connect(host="db",
                                    user="root",
                                    database="crawlerdb",
                                    password="mypass123")

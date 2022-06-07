@@ -69,8 +69,7 @@ class indeedgr(scrapy.Spider):
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         try:
             connection = mysql.connector.connect(host='db',
-                                                 database='crawlerdb',
-                                                 #port='13306',
+                                                 database='crawlerdb',                                           
                                                  user='root',
                                                  password='mypass123')
             cursor = connection.cursor(prepared=True)

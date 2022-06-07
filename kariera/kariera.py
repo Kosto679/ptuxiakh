@@ -14,8 +14,7 @@ class kariera(scrapy.Spider):
     allowed_domains = ['www.kariera.gr']
     start_urls = [
         'https://www.kariera.gr/%CE%B8%CE%AD%CF%83%CE%B5%CE%B9%CF%82-%CE%B5%CF%81%CE%B3%CE%B1%CF%83%CE%AF%CE%B1%CF%82?sort=date']
-    conn = mysql.connector.connect(host="localhost",
-                                   port="13306",
+    conn = mysql.connector.connect(host="db",
                                    user="root",
                                    database="crawlerdb",
                                    password="mypass123")

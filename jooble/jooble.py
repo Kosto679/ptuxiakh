@@ -39,8 +39,7 @@ class jooble(scrapy.Spider):
         self.count_new = 0
         self.count_exist =0
         try:
-            self.connection = mysql.connector.connect(host="localhost",
-                                   port="13306",
+            self.connection = mysql.connector.connect(host="db",                                  
                                    user="root",
                                    database="crawlerdb",
                                    password="mypass123")

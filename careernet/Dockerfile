@@ -6,13 +6,10 @@ COPY requirements.txt ./
 
 RUN pip install  -r requirements.txt
 
-ADD wait-for.sh .
+COPY wait-for.sh .
 
 RUN chmod +x wait-for.sh
 
-
 COPY . .
 
-ENTRYPOINT [ "/bin/bash", "-c" ]
-
-#CMD ["./wait-for.sh" && "python", "./careernet.py"]
+#CMD [ "/wait-for.sh" ]

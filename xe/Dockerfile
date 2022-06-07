@@ -1,10 +1,15 @@
-FROM python:3
+FROM python:3.8
 
 WORKDIR /usr/src/app
 
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+
+RUN pip install  -r requirements.txt
+
+COPY wait-for.sh .
+
+RUN chmod +x wait-for.sh
 
 COPY . .
 
-CMD [ "python", "./xe.py" ]
+#CMD [ "/wait-for.sh" ]

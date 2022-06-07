@@ -4,7 +4,6 @@ services:
     build:
       context: ./mariadb
       dockerfile: Dockerfile
-      
     container_name: db
     environment:
       MARIADB_ROOT_PASSWORD: mypass123
@@ -26,100 +25,109 @@ services:
       PMA_HOST: db
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
-    restart: always
+    restart: on-failure
     ports:
       - 8081:80  
     hostname: phpmyadmin
 
-  #carrerjet:
-   #build:
-     #context: ./careerjet
-     #dockerfile: Dockerfile
-    #hostname: careerjet
-    #container_name: careerjet
-    #depends_on:
-      #- db
-    #command:
-    #restart: on-failure
+  carrerjet:
+    build:
+     context: ./careerjet
+     dockerfile: Dockerfile
+    hostname: careerjet
+    container_name: careerjet
+    depends_on:
+      - db
+    command: ["./wait-for.sh", "db:13306",  "-t", "10", "--", "python", "./careerjet.py"]
+    restart: on-failure
  
   careernet:
     build:
-      context: ./careernet
-      dockerfile: Dockerfile
+       context: ./careernet
+       dockerfile: Dockerfile
     hostname: careernet
     container_name: careernet
     depends_on:
       - db
-    command: sh -c './wait-for db:3306 -- database is ready for connections' , '--' , 'python' , 'careernet.py'
+    command: ["./wait-for.sh", "db:13306",  "-t", "10", "--", "python", "./careernet.py"]
     restart: on-failure  
+    
+  indeedgr:
+    build: 
+      context: ./indeedgr
+      dockerfile: Dockerfile
+    hostname: indeedgr
+    container_name: indeedgr
+    depends_on:
+     - db
+    command: ["./wait-for.sh", "db:13306",  "-t", "10", "--", "python", "./indeedgr.py"]
+    restart: on-failure
+  
+  jobfind:
+    build: 
+     context: ./jobfind
+     dockerfile: Dockerfile
+    hostname: jobfind
+    container_name: jobfind
+    depends_on:
+     - db
+    command: ["./wait-for.sh", "db:13306",  "-t", "10", "--", "python", "./jobfind.py"]
+    restart: on-failure
+  
+  jooble:
+    build: 
+     context: ./jooble
+     dockerfile: Dockerfile
+    hostname: jooble
+    container_name: jooble
+    depends_on:
+     - db
+    command: ["./wait-for.sh", "db:13306",  "-t", "10", "--", "python", "./jooble.py"]
+    restart: on-failure
+  
+  kariera:
+    build: 
+      context: ./kariera
+      dockerfile: Dockerfile
+    hostname: kariera
+    container_name: kariera
+    depends_on:
+      - db
+    command: ["./wait-for.sh", "db:13306",  "-t", "10", "--", "python", "./kariera.py"]
+    restart: on-failure
+  
+  randstand:
+    build:
+      context: ./randstad
+      dockerfile: Dockerfile
+    hostname: randstad
+    container_name: randstad
+    depends_on:
+      - db
+    command: ["./wait-for.sh", "db:13306",  "-t", "10", "--", "python", "./randstad.py"]
+    restart: on-failure
+  
+  skywalker:
+    build:
+      context: ./skywalker
+      dockerfile: Dockerfile
+    hostname: skywalker
+    container_name: skywalker
+    depends_on: 
+      - db
+    command: ["./wait-for.sh", "db:13306",  "-t", "10", "--", "python", "./skywalker.py"]
+    restart: on-failure
+  
+  xe:
+    build:
+      context: ./xe
+      dockerfile: Dockerfile
+    hostname: xe
+    container_name: xe
+    depends_on: 
+      - db
+    command: ["./wait-for.sh", "db:13306",  "-t", "10", "--", "python", "./xe.py"]
+    restart: on-failure
     
 volumes:
   dbdata:
-  # indeedgr:
-  #  build: 
-  #    context: ./indeedgr
-  #    dockerfile: Dockerfile
-  #   hostname: indeedgr
-  #   container_name: indeedgr
-  #   depends_on:
-  #    - db
-  #   command:
-  #   restart: on-failure
-  
-  #jobfind:
-  #  build: 
-   #   context: ./jobfind
-   #   dockerfile: Dockerfile
-   # hostname: jobfind
-   # container_name: jobfind
-    #depends_on:
-    #  - db
-    #command:
-    #restart: on-failure
-  
-  #jooble:
-  #  build: 
-   #   context: ./jooble
-    #  dockerfile: Dockerfile
-    #hostname: jooble
-    #container_name: jooble
-    #depends_on:
-     # - db
-    #command:
-    #restart: on-failure
-  
-  # kariera:
-  #   build: 
-  #     context: ./kariera
-  #     dockerfile: Dockerfile
-  #   hostname: kariera
-  #   container_name: kariera
-  #   depends_on:
-  #     - db
-  #   #command:
-  #   restart: on-failure
-  
-  # randstand:
-  #   build:
-  #     context: ./randstad
-  #     dockerfile: Dockerfile
-  #   hostname: randstad
-  #   container_name: randstad
-  #   depends_on:
-  #     - db
-  #   #command: 
-  #   restart: on-failure
-  
-  # skywalker:
-  #   build:
-  #     context: ./skywalker
-  #     dockerfile: Dockerfile
-  #   hostname: skywalker
-  #   container_name: skywalker
-  #   depends_on: 
-  #     - db
-  #   #command: 
-  #   restart: on-failure
-
-  
-
